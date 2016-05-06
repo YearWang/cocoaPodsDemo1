@@ -11,9 +11,19 @@
 
 @interface Post : NSObject
 
-@property (copy,nonatomic) NSString *title; //文章标题
-@property (copy,nonatomic) NSString *postDate; //文章发表时间
-@property (copy,nonatomic) NSString *postUrl; //文章正文内容的 Url
+@property (nonatomic, strong) NSMutableArray *licenses;
+
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *district;
+@property (nonatomic, copy) NSString *date;
+@property (nonatomic, copy) NSString *company;
+
+@property (nonatomic, copy) NSString *licenseUrl;
+
+@property (nonatomic, assign) NSUInteger price;
+@property (nonatomic, assign) NSUInteger quantity;
+
+@property (nonatomic, strong) NSMutableArray *buildings;
 
 + (NSArray *)getNewPosts; //获取所有文章
 + (instancetype)postWithHtmlStr:(ONOXMLElement *)element; //用HTML数据创建Post类

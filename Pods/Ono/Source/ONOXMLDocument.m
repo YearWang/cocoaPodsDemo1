@@ -86,7 +86,7 @@ NSString * ONOXPathFromCSS(NSString *CSS) {
                         NSRange range = NSMakeRange(0, [token length]);
 
                         {
-                            NSTextCheckingResult *result = [ONOIdRegularExpression() firstMatchInString:CSS options:(NSMatchingOptions)0 range:range];
+                            NSTextCheckingResult *result = [ONOIdRegularExpression() firstMatchInString:token options:(NSMatchingOptions)0 range:range];
                             if ([result numberOfRanges] > 1) {
                                 [mutableXPathComponent appendFormat:@"%@[@id = '%@']", (symbolRange.location == 0) ? @"*" : @"", [token substringWithRange:[result rangeAtIndex:1]]];
                             }
@@ -390,11 +390,11 @@ static void ONOSetErrorFromXMLErrorPtr(NSError * __autoreleasing *error, xmlErro
     return [self.rootElement CSS:CSS];
 }
 
-- (void)enumerateElementsWithCSS:(NSString *)CSS
-                           block:(void (^)(ONOXMLElement *))block
-{
-    [self.rootElement enumerateElementsWithCSS:CSS block:block];
-}
+//- (void)enumerateElementsWithCSS:(NSString *)CSS
+//                           block:(void (^)(ONOXMLElement *))block
+//{
+//    [self.rootElement enumerateElementsWithCSS:CSS block:block];
+//}
 
 - (void)enumerateElementsWithCSS:(NSString *)CSS
                       usingBlock:(void (^)(ONOXMLElement *element, NSUInteger idx, BOOL *stop))block
