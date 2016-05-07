@@ -25,7 +25,7 @@
 
 @property (nonatomic, strong) NSMutableArray *buildings;
 
-+ (NSArray *)getNewPosts; //获取所有文章
++ (NSMutableArray *)getNewPosts; //获取所有文章
 + (instancetype)postWithHtmlStr:(ONOXMLElement *)element; //用HTML数据创建Post类
 
 @end

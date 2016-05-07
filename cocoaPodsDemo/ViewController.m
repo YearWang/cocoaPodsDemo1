@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [Post getNewPosts];
+    NSMutableArray *array =  [Post getNewPosts];
 }
 
 - (void)didReceiveMemoryWarning {

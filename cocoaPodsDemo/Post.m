@@ -13,7 +13,7 @@ static NSString *const licenseUrlStr = @"http://ris.szpl.gov.cn/bol/";
 
 @implementation Post
 
-+ (NSArray *)getNewPosts
++ (NSMutableArray *)getNewPosts
 {
     NSMutableArray *array = [NSMutableArray array];
     
@@ -29,16 +29,16 @@ static NSString *const licenseUrlStr = @"http://ris.szpl.gov.cn/bol/";
     ONOXMLDocument *doc = [ONOXMLDocument HTMLDocumentWithData:data error:&error];
     //NSLog(@"%@",doc);
     
-    ONOXMLElement *postsParentElement = [doc firstChildWithXPath:@"//*[@bgcolor='#D9EEFF']"]; //寻找该 XPath 代表的 HTML 节点
-    NSLog(@"%@",postsParentElement);
-    if (!postsParentElement) {
-        NSLog(@"空");
-    }
+    ONOXMLElement *postsParentElement = [doc firstChildWithXPath:@"//table[@width='100%']/tr/td/table"]; //寻找该 XPath 代表的 HTML 节点
+    //NSLog(@"%@",postsParentElement);
+    
     //遍历其子节点
     [postsParentElement.children enumerateObjectsUsingBlock:^(ONOXMLElement *element, NSUInteger idx, BOOL *_Nonnull stop) {
+        
         NSLog(@"%@",element);
+        
         Post *post = [Post postWithHtmlStr:element];
-        if (post) {
+        if (post.name) {
             [array addObject:post];
         }
     }];
@@ -64,12 +64,12 @@ static NSString *const licenseUrlStr = @"http://ris.szpl.gov.cn/bol/";
     p.date = [dateElement stringValue];
     
     return p;
-    
 }
 
-- (void)setPostUrl:(NSString *)postUrl
+
+- (void)setLicenseUrl:(NSString *)licenseUrl
 {
-    _licenseUrl = [licenseUrlStr stringByAppendingString:postUrl];
+    _licenseUrl = [NSString stringWithFormat:@"%@%@",licenseUrlStr,licenseUrl];
 }
 
 @end
